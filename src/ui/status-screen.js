@@ -19,7 +19,7 @@ export function StatusScreen({ title, description, details, performanceMode = fa
       create(
         motion.div,
         {
-          className: "floating-card max-w-2xl px-8 py-10 text-center",
+          className: "floating-card transform-gpu will-change-[transform,opacity] max-w-2xl px-8 py-10 text-center",
           initial: reduceMotion ? { opacity: 0 } : { opacity: 0, y: 18, scale: 0.985 },
           animate: reduceMotion
             ? { opacity: 1 }

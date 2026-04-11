@@ -8,6 +8,7 @@ import { buildQrParticleSeeds } from "../shared/qr.js";
 
 function AnimatedBlock({ as = "div", className, children, reduceMotion, delay = 0, y = 14, transition = {}, style = {}, ...rest }) {
   const MotionTag = motion[as] || motion.div;
+  const motionClassName = className ? `${className} transform-gpu will-change-[transform,opacity]` : "transform-gpu will-change-[transform,opacity]";
 
   if (reduceMotion) {
     const { layout, layoutId, transition: motionTransition, initial, animate, exit, variants, ...domProps } = rest;
@@ -15,7 +16,7 @@ function AnimatedBlock({ as = "div", className, children, reduceMotion, delay = 
     return create(
       as,
       {
-        className,
+        className: motionClassName,
         style,
         ...domProps,
       },
@@ -42,7 +43,7 @@ function AnimatedBlock({ as = "div", className, children, reduceMotion, delay = 
   return create(
     MotionTag,
     {
-      className,
+      className: motionClassName,
       style,
       initial: initialState,
       animate: animateState,
@@ -103,7 +104,7 @@ function PanelAtmosphere({ reduceMotion, performanceMode, panelVisual }) {
     null,
     create(motion.span, {
       className:
-        "pointer-events-none absolute inset-x-[-18%] top-[-24%] z-0 h-[58%] rounded-[44%] mix-blend-screen",
+        "pointer-events-none absolute inset-x-[-18%] top-[-24%] z-0 h-[58%] rounded-[44%] mix-blend-screen transform-gpu will-change-[transform,opacity]",
       "aria-hidden": true,
       style: {
         background: `radial-gradient(circle at 50% 45%, rgba(${atmosphereRgb}, ${haloInnerAlpha}) 0%, rgba(${atmosphereRgb}, ${haloOuterAlpha}) 36%, transparent 76%)`,
@@ -114,7 +115,7 @@ function PanelAtmosphere({ reduceMotion, performanceMode, panelVisual }) {
     }),
     create(motion.span, {
       className:
-        "pointer-events-none absolute inset-x-[-28%] bottom-[-42%] z-0 h-[70%] blur-[2px] mix-blend-screen",
+        "pointer-events-none absolute inset-x-[-28%] bottom-[-42%] z-0 h-[70%] blur-[2px] mix-blend-screen transform-gpu will-change-[transform,opacity]",
       "aria-hidden": true,
       style: {
         background: `linear-gradient(120deg, rgba(${atmosphereRgb}, 0) 0%, rgba(${atmosphereRgb}, ${beamMidAlpha}) 34%, rgba(${atmosphereRgb}, ${beamPeakAlpha}) 50%, rgba(${atmosphereRgb}, ${beamMidAlpha}) 66%, rgba(${atmosphereRgb}, 0) 100%)`,
@@ -146,7 +147,7 @@ function MetricTile({ metric, index, reduceMotion }) {
   return create(
     motion.div,
     {
-      className: "tv-metric inline-flex w-auto max-w-full shrink-0 flex-col items-start self-start rounded-xl bg-white/[0.06] px-2.5 py-2 text-white/90",
+      className: "tv-metric transform-gpu will-change-[transform,opacity] inline-flex w-auto max-w-full shrink-0 flex-col items-start self-start rounded-xl bg-white/[0.06] px-2.5 py-2 text-white/90",
       layout: "position",
       transition: { layout: { type: "spring", stiffness: 220, damping: 30, mass: 0.78 } },
       initial: reduceMotion ? { opacity: 0 } : { opacity: 0, y: startY, x: startX, scale: 0.985 },
@@ -291,7 +292,7 @@ function FeaturePill({ feature, index, reduceMotion }) {
     return create(
       "span",
       {
-        className: "tv-feature-pill inline-flex h-9 w-9 items-center justify-center rounded-full bg-cyan-100/12 text-cyan-50 shadow-[0_6px_18px_rgba(0,0,0,0.2)]",
+        className: "tv-feature-pill transform-gpu will-change-[transform,opacity] inline-flex h-9 w-9 items-center justify-center rounded-full bg-cyan-100/12 text-cyan-50 shadow-[0_6px_18px_rgba(0,0,0,0.2)]",
         role: "img",
         "aria-label": feature,
         title: feature,
@@ -305,7 +306,7 @@ function FeaturePill({ feature, index, reduceMotion }) {
   return create(
     motion.span,
     {
-      className: "tv-feature-pill inline-flex h-9 w-9 items-center justify-center rounded-full bg-cyan-100/12 text-cyan-50 shadow-[0_6px_18px_rgba(0,0,0,0.2)]",
+      className: "tv-feature-pill transform-gpu will-change-[transform,opacity] inline-flex h-9 w-9 items-center justify-center rounded-full bg-cyan-100/12 text-cyan-50 shadow-[0_6px_18px_rgba(0,0,0,0.2)]",
       layout: "position",
       transition: { layout: { type: "spring", stiffness: 230, damping: 31, mass: 0.78 } },
       role: "img",
@@ -334,7 +335,7 @@ function DetailCard({ detail, index, reduceMotion }) {
   if (reduceMotion) {
     return create(
       "div",
-      { className: "tv-detail inline-flex w-auto max-w-full shrink-0 flex-col items-start self-start rounded-xl bg-white/[0.05] px-2.5 py-2" },
+      { className: "tv-detail transform-gpu will-change-[transform,opacity] inline-flex w-auto max-w-full shrink-0 flex-col items-start self-start rounded-xl bg-white/[0.05] px-2.5 py-2" },
       create("div", { className: "text-[0.54rem] uppercase tracking-[0.2em] text-cyan-200/80" }, detail.label || ""),
       create("div", { className: "mt-1 text-[0.76rem] leading-tight text-white/90" }, detail.value || "")
     );
@@ -345,7 +346,7 @@ function DetailCard({ detail, index, reduceMotion }) {
   return create(
     motion.div,
     {
-      className: "tv-detail inline-flex w-auto max-w-full shrink-0 flex-col items-start self-start rounded-xl bg-white/[0.05] px-2.5 py-2",
+      className: "tv-detail transform-gpu will-change-[transform,opacity] inline-flex w-auto max-w-full shrink-0 flex-col items-start self-start rounded-xl bg-white/[0.05] px-2.5 py-2",
       layout: "position",
       transition: { layout: { type: "spring", stiffness: 210, damping: 30, mass: 0.82 } },
       initial: reduceMotion ? { opacity: 0 } : { opacity: 0, y: 8, x: index % 2 === 0 ? -2 : 2, scale: 0.99 },
@@ -382,12 +383,12 @@ function AnimatedQr({ qrUrl, propertyName, reduceMotion, performanceMode }) {
       "div",
       {
         className:
-          "tv-qr relative grid h-[82px] w-[82px] place-items-center overflow-hidden rounded-xl bg-white p-1.5 shadow-[0_10px_30px_rgba(0,0,0,0.3)] sm:h-[92px] sm:w-[92px] lg:h-[104px] lg:w-[104px] 2xl:h-[128px] 2xl:w-[128px]",
+          "tv-qr transform-gpu will-change-[transform,opacity] relative grid h-[82px] w-[82px] place-items-center overflow-hidden rounded-xl bg-white p-1.5 shadow-[0_10px_30px_rgba(0,0,0,0.3)] sm:h-[92px] sm:w-[92px] lg:h-[104px] lg:w-[104px] 2xl:h-[128px] 2xl:w-[128px]",
       },
       create("img", {
         src: qrUrl,
         alt: `Codigo QR para abrir ${propertyName}`,
-        className: "relative z-[1] block h-full w-full object-contain",
+        className: "transform-gpu relative z-[1] block h-full w-full object-contain",
         loading: "eager",
         decoding: "async",
         draggable: false,
@@ -496,7 +497,7 @@ function AnimatedQr({ qrUrl, propertyName, reduceMotion, performanceMode }) {
     motion.div,
     {
       className:
-        "tv-qr relative grid h-[82px] w-[82px] place-items-center overflow-hidden rounded-xl bg-white p-1.5 shadow-[0_10px_30px_rgba(0,0,0,0.3)] sm:h-[92px] sm:w-[92px] lg:h-[104px] lg:w-[104px] 2xl:h-[128px] 2xl:w-[128px]",
+        "tv-qr transform-gpu will-change-[transform,opacity] relative grid h-[82px] w-[82px] place-items-center overflow-hidden rounded-xl bg-white p-1.5 shadow-[0_10px_30px_rgba(0,0,0,0.3)] sm:h-[92px] sm:w-[92px] lg:h-[104px] lg:w-[104px] 2xl:h-[128px] 2xl:w-[128px]",
       layout: "position",
       layoutId: "panel-qr",
       transition: { layout: { type: "spring", stiffness: 230, damping: 28, mass: 0.72 } },
@@ -507,7 +508,7 @@ function AnimatedQr({ qrUrl, propertyName, reduceMotion, performanceMode }) {
     create(motion.img, {
       src: qrUrl,
       alt: `Codigo QR para abrir ${propertyName}`,
-      className: "relative z-[1] block h-full w-full object-contain",
+      className: "transform-gpu relative z-[1] block h-full w-full object-contain",
       loading: "eager",
       decoding: "async",
       draggable: false,
@@ -642,6 +643,12 @@ export function PropertyPanel({ property, siteBaseUrl, qrUrl, utils, reduceMotio
   const surfaceTintAlpha = panelVisual && Number.isFinite(panelVisual.tintAlpha) ? panelVisual.tintAlpha : 0.14;
   const surfaceHighlightAlpha = panelVisual && Number.isFinite(panelVisual.highlightAlpha) ? panelVisual.highlightAlpha : 0.18;
   const surfaceShadowAlpha = panelVisual && Number.isFinite(panelVisual.shadowAlpha) ? panelVisual.shadowAlpha : 0.22;
+  const minimumSurfaceAlpha = performanceMode ? 0.5 : 0.44;
+  const minimumBorderAlpha = performanceMode ? 0.12 : 0.1;
+  const normalizedSurfaceAlpha = panelVisual && Number.isFinite(panelVisual.bgAlpha) ? panelVisual.bgAlpha : 0.38;
+  const normalizedSurfaceBorderAlpha = panelVisual && Number.isFinite(panelVisual.borderAlpha) ? panelVisual.borderAlpha : 0.08;
+  const surfaceAlpha = Math.max(normalizedSurfaceAlpha, minimumSurfaceAlpha);
+  const surfaceBorderAlpha = Math.max(normalizedSurfaceBorderAlpha, minimumBorderAlpha);
   const priceGradient = panelVisual && panelVisual.priceGradient ? panelVisual.priceGradient : null;
   const priceStyle = priceGradient
     ? {
@@ -666,7 +673,7 @@ export function PropertyPanel({ property, siteBaseUrl, qrUrl, utils, reduceMotio
     ? {
         backgroundColor: `rgba(4, 34, 27, ${surfaceAlpha.toFixed(3)})`,
         borderColor: `rgba(255, 255, 255, ${surfaceBorderAlpha.toFixed(3)})`,
-        boxShadow: `0 10px 24px rgba(0,0,0,0.18)`,
+        boxShadow: `0 10px 24px rgba(0,0,0,0.22)`,
       }
     : {
         backgroundColor: panelBackgroundMotion,
@@ -826,7 +833,7 @@ export function PropertyPanel({ property, siteBaseUrl, qrUrl, utils, reduceMotio
       motion.section,
       {
         key: property.id,
-        className: panelClassName,
+        className: `${panelClassName} transform-gpu will-change-[transform,opacity]`,
         style: panelSurfaceStyle,
         variants: panelVariants,
         initial: "hidden",
@@ -841,11 +848,11 @@ export function PropertyPanel({ property, siteBaseUrl, qrUrl, utils, reduceMotio
         { id: "property-panel-layout" },
         create(
           motion.div,
-          { className: "grid gap-3 grid-cols-[minmax(0,1fr)_auto] items-start xl:gap-4 2xl:gap-5", variants: sectionVariants, layout: "position" },
+          { className: "grid gap-3 grid-cols-[minmax(0,1fr)_auto] items-start transform-gpu will-change-[transform,opacity] xl:gap-4 2xl:gap-5", variants: sectionVariants, layout: "position" },
           create(
             motion.div,
             {
-              className: "min-w-0",
+              className: "min-w-0 transform-gpu will-change-[transform,opacity]",
               variants: sectionVariants,
               layout: "position",
             },
@@ -856,7 +863,7 @@ export function PropertyPanel({ property, siteBaseUrl, qrUrl, utils, reduceMotio
           create(
             motion.div,
             {
-              className: "grid justify-items-end gap-1 text-right",
+              className: "grid justify-items-end gap-1 text-right transform-gpu will-change-[transform,opacity]",
               variants: sectionVariants,
               layout: "position",
               layoutId: "panel-price",
@@ -889,14 +896,14 @@ export function PropertyPanel({ property, siteBaseUrl, qrUrl, utils, reduceMotio
           : null,
         create(
           motion.div,
-          { className: "mt-3 grid grid-cols-1 items-start gap-2.5 xl:gap-3 2xl:gap-4", variants: sectionVariants, layout: "position" },
+          { className: "mt-3 grid grid-cols-1 items-start gap-2.5 transform-gpu will-change-[transform,opacity] xl:grid-cols-[minmax(0,1fr)_auto] xl:gap-3 2xl:gap-4", variants: sectionVariants, layout: "position" },
           create(
             motion.div,
-            { className: "grid min-w-0 gap-2.5 xl:gap-3 2xl:gap-4", variants: sectionVariants, layout: "position" },
+            { className: "grid min-w-0 gap-2.5 transform-gpu will-change-[transform,opacity] xl:col-start-1 xl:row-start-1 xl:gap-3 2xl:gap-4", variants: sectionVariants, layout: "position" },
             metrics.length
               ? create(
                   motion.div,
-                  { className: "tv-metrics-grid flex flex-wrap items-start gap-2", layout: "position" },
+                  { className: "tv-metrics-grid transform-gpu will-change-[transform,opacity] flex flex-wrap items-start gap-2", layout: "position" },
                   metrics.map((metric, index) =>
                     create(MetricTile, {
                       metric,
@@ -910,7 +917,7 @@ export function PropertyPanel({ property, siteBaseUrl, qrUrl, utils, reduceMotio
             details.length
               ? create(
                   motion.div,
-                  { className: "tv-details-grid flex flex-wrap items-start gap-2", layout: "position" },
+                  { className: "tv-details-grid transform-gpu will-change-[transform,opacity] flex flex-wrap items-start gap-2", layout: "position" },
                   details.map((detail, index) =>
                     create(DetailCard, {
                       detail,
@@ -924,7 +931,11 @@ export function PropertyPanel({ property, siteBaseUrl, qrUrl, utils, reduceMotio
             features.length
               ? create(
                   motion.div,
-                  { className: "tv-features-wrap flex flex-wrap items-start gap-2", layout: "position" },
+                  {
+                    className: "tv-features-wrap transform-gpu will-change-[transform,opacity] flex flex-wrap items-start gap-2 xl:col-start-1 xl:row-start-2 xl:pt-0.5",
+                    variants: sectionVariants,
+                    layout: "position",
+                  },
                   features.map((feature, index) =>
                     create(FeaturePill, {
                       feature,
@@ -934,29 +945,28 @@ export function PropertyPanel({ property, siteBaseUrl, qrUrl, utils, reduceMotio
                     })
                   )
                 )
-              : null
-          )
-        ),
-        create(
-          motion.div,
-          {
-            className: "tv-qr-slot absolute right-3 bottom-3 z-20 grid justify-items-center gap-1 text-center xl:right-4 xl:bottom-4 2xl:right-5 2xl:bottom-5",
-            variants: sectionVariants,
-            layout: "position",
-            layoutId: "panel-qr-slot",
-            transition: { layout: { type: "spring", stiffness: 230, damping: 28, mass: 0.74 } },
-          },
-          create(AnimatedQr, {
-            key: resolvedQrUrl,
-            qrUrl: resolvedQrUrl,
-            propertyName: property.name,
-            reduceMotion: panelComponentReduceMotion,
-            performanceMode,
-          }),
+              : null,
           create(
-            "p",
-            { className: "tv-qr-caption text-[clamp(0.5rem,0.75vw,0.72rem)] uppercase tracking-[0.22em] text-cyan-100/75" },
-            property.publishedUrl ? "Publicación" : "Inmueble"
+            motion.div,
+            {
+              className: "tv-qr-slot transform-gpu will-change-[transform,opacity] grid justify-items-center gap-1 text-center xl:col-start-2 xl:row-start-1 xl:row-span-2 xl:justify-self-end xl:self-start",
+              variants: sectionVariants,
+              layout: "position",
+              layoutId: "panel-qr-slot",
+              transition: { layout: { type: "spring", stiffness: 230, damping: 28, mass: 0.74 } },
+            },
+            create(AnimatedQr, {
+              key: resolvedQrUrl,
+              qrUrl: resolvedQrUrl,
+              propertyName: property.name,
+              reduceMotion: panelComponentReduceMotion,
+              performanceMode,
+            }),
+            create(
+              "p",
+              { className: "tv-qr-caption text-[clamp(0.5rem,0.75vw,0.72rem)] uppercase tracking-[0.22em] text-cyan-100/75" },
+              property.publishedUrl ? "Publicación" : "Inmueble"
+            )
           )
         )
       )

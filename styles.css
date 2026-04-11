@@ -1619,7 +1619,7 @@ html.tv-performance-mode .media-stage__overlay {
     margin-top: 1rem !important;
     font-size: clamp(1.08rem, 1.08vmin, 1.5rem) !important;
     line-height: 1.45 !important;
-    max-width: calc(100% - clamp(13.5rem, 10vmin, 17rem)) !important;
+    max-width: 100% !important;
   }
 
   .tv-metrics-grid {
@@ -1635,8 +1635,8 @@ html.tv-performance-mode .media-stage__overlay {
   }
 
   .tv-qr-slot {
-    right: clamp(1.5rem, 1.75vmin, 2.7rem) !important;
-    bottom: clamp(1.5rem, 1.75vmin, 2.7rem) !important;
+    align-self: start !important;
+    justify-self: end !important;
   }
 
   .tv-qr {

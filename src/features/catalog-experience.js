@@ -249,7 +249,7 @@ export function CatalogExperience({ catalog, utils, siteBaseUrl, defaultDuration
     create(
       motion.div,
       {
-        className: "stage-frame kiosk-frame",
+        className: "stage-frame kiosk-frame transform-gpu will-change-[transform,opacity]",
         initial: reduceMotion || performanceMode ? { opacity: 1 } : { opacity: 0, y: 14, scale: 0.99 },
         animate: reduceMotion || performanceMode
           ? { opacity: 1 }
@@ -258,7 +258,7 @@ export function CatalogExperience({ catalog, utils, siteBaseUrl, defaultDuration
       create(
         motion.div,
         {
-          className: "tv-logo-fixed",
+          className: "tv-logo-fixed transform-gpu will-change-[transform,opacity]",
           initial: reduceMotion ? { opacity: 1 } : { opacity: 0, y: -8 },
           animate: reduceMotion ? { opacity: 1 } : { opacity: 1, y: 0, transition: { duration: 0.22, ease: "easeOut", delay: 0.05 } },
           layout: "position",

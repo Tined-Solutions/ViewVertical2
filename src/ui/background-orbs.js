@@ -23,19 +23,19 @@ export function BackgroundOrbs({ reduceMotion, performanceMode = false }) {
     fragment,
     null,
     create(motion.div, {
-      className: "stage-shell-orb stage-shell-orb--primary", 
+      className: "stage-shell-orb stage-shell-orb--primary transform-gpu will-change-[transform,opacity]",
       "aria-hidden": true,
       animate: primaryAnimate,
       transition: primaryTransition,
     }),
     create(motion.div, {
-      className: "stage-shell-orb stage-shell-orb--secondary",
+      className: "stage-shell-orb stage-shell-orb--secondary transform-gpu will-change-[transform,opacity]",
       "aria-hidden": true,
       animate: secondaryAnimate,
       transition: secondaryTransition,
     }),
     create(motion.div, {
-      className: "stage-shell-orb stage-shell-orb--tertiary",
+      className: "stage-shell-orb stage-shell-orb--tertiary transform-gpu will-change-[transform,opacity]",
       "aria-hidden": true,
       animate: tertiaryAnimate,
       transition: tertiaryTransition,

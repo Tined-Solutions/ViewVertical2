@@ -50,7 +50,7 @@ export function MediaStage({ property, media, reduceMotion, performanceMode, onM
       return create(
         "div",
         {
-          className: "media-stage__item",
+          className: "media-stage__item transform-gpu will-change-[transform,opacity]",
         },
         create(
           "div",
@@ -67,7 +67,7 @@ export function MediaStage({ property, media, reduceMotion, performanceMode, onM
       "div",
       {
         key: mediaSrc,
-        className: "media-stage__item",
+        className: "media-stage__item transform-gpu will-change-[transform,opacity]",
         style: { willChange: "auto" },
       },
       media.type === "video"
@@ -79,6 +79,7 @@ export function MediaStage({ property, media, reduceMotion, performanceMode, onM
             loop: false,
             playsInline: true,
             preload: "metadata",
+            className: "transform-gpu",
             "aria-label": media.caption ? `${property.name} - ${media.caption}` : property.name,
             ref: videoRef,
             onLoadedMetadata: (event) => {
@@ -103,7 +104,7 @@ export function MediaStage({ property, media, reduceMotion, performanceMode, onM
                 onMediaDurationChange(Math.round(durationSeconds * 1000));
               }
             },
-            style: { backfaceVisibility: "hidden" },
+            style: { backfaceVisibility: "hidden", willChange: "auto" },
           })
         : create("img", {
             src: media.src,
@@ -111,9 +112,10 @@ export function MediaStage({ property, media, reduceMotion, performanceMode, onM
             loading: "eager",
             decoding: "async",
             fetchPriority: "high",
+            className: "transform-gpu",
             draggable: false,
             referrerPolicy: "no-referrer",
-            style: { backfaceVisibility: "hidden", transform: "translateZ(0)" },
+            style: { backfaceVisibility: "hidden", transform: "translateZ(0)", willChange: "auto" },
           })
     );
   }
@@ -174,7 +176,7 @@ export function MediaStage({ property, media, reduceMotion, performanceMode, onM
     return create(
       motion.div,
       {
-        className: "media-stage__item",
+        className: "media-stage__item transform-gpu will-change-[transform,opacity]",
         initial: reduceMotion ? { opacity: 0 } : { opacity: 0, scale: 1.02 },
         animate: reduceMotion
           ? { opacity: 1 }
@@ -198,7 +200,7 @@ export function MediaStage({ property, media, reduceMotion, performanceMode, onM
       motion.div,
       {
         key: mediaSrc,
-        className: "media-stage__item",
+        className: "media-stage__item transform-gpu will-change-[transform,opacity]",
         style: reduceMotion || isVideo ? undefined : { transformOrigin: "center center", willChange: "transform, opacity" },
         variants: mediaVariants,
         initial: "hidden",
@@ -214,6 +216,7 @@ export function MediaStage({ property, media, reduceMotion, performanceMode, onM
             loop: false,
             playsInline: true,
             preload: "metadata",
+            className: "transform-gpu",
             "aria-label": media.caption ? `${property.name} - ${media.caption}` : property.name,
             ref: videoRef,
             onLoadedMetadata: (event) => {
@@ -238,7 +241,7 @@ export function MediaStage({ property, media, reduceMotion, performanceMode, onM
                 onMediaDurationChange(Math.round(durationSeconds * 1000));
               }
             },
-            style: reduceMotion ? undefined : { backfaceVisibility: "hidden" },
+            style: reduceMotion ? undefined : { backfaceVisibility: "hidden", willChange: "auto" },
           })
         : create("img", {
             src: media.src,
@@ -246,13 +249,15 @@ export function MediaStage({ property, media, reduceMotion, performanceMode, onM
             loading: "eager",
             decoding: "async",
             fetchPriority: "high",
+            className: "transform-gpu",
             draggable: false,
             referrerPolicy: "no-referrer",
-            style: reduceMotion ? undefined : { backfaceVisibility: "hidden", transform: "translateZ(0)" },
+            style: reduceMotion ? undefined : { backfaceVisibility: "hidden", transform: "translateZ(0)", willChange: "auto" },
           }),
       !reduceMotion
         ? create(motion.span, {
             "aria-hidden": true,
+            className: "transform-gpu will-change-[transform,opacity]",
             initial: { opacity: 0.04 },
             animate: {
               opacity: [0.04, performanceMode ? 0.16 : 0.22],
@@ -272,6 +277,7 @@ export function MediaStage({ property, media, reduceMotion, performanceMode, onM
       !reduceMotion
         ? create(motion.span, {
             "aria-hidden": true,
+            className: "transform-gpu will-change-[transform,opacity]",
             initial: { opacity: 0.12, x: -10 },
             animate: { opacity: 0.3, x: 0, transition: { duration: 0.52, ease: "easeOut" } },
             exit: { opacity: 0.56, x: 28, transition: { duration: 0.48, ease: "easeIn" } },
@@ -291,6 +297,7 @@ export function MediaStage({ property, media, reduceMotion, performanceMode, onM
       !reduceMotion && !performanceMode
         ? create(motion.span, {
             "aria-hidden": true,
+            className: "transform-gpu will-change-[transform,opacity]",
             initial: { opacity: 0, x: -6 },
             animate: { opacity: 0.34, x: 0, transition: { duration: 0.5, ease: "easeOut" } },
             exit: { opacity: 0.18, x: 14, transition: { duration: 0.44, ease: "easeIn" } },

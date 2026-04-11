@@ -943,7 +943,8 @@ export function PropertyPanel({ property, siteBaseUrl, qrUrl, utils, reduceMotio
                     })
                   )
                 )
-              : null,
+              : null
+          ),
           create(
             motion.div,
             {
@@ -969,5 +970,5 @@ export function PropertyPanel({ property, siteBaseUrl, qrUrl, utils, reduceMotio
         )
       )
     )
-  ));
+  );
 }

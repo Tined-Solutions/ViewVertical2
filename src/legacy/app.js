@@ -13,23 +13,48 @@
     return Boolean(catalog && Array.isArray(catalog.properties) && catalog.properties.length > 0);
   }
 
+  function toStableSerializable(value) {
+    if (Array.isArray(value)) {
+      return value.map((item) => {
+        if (item === undefined || typeof item === "function" || typeof item === "symbol") {
+          return null;
+        }
+
+        return toStableSerializable(item);
+      });
+    }
+
+    if (value && typeof value === "object") {
+      const stableObject = {};
+      const keys = Object.keys(value).sort((left, right) => left.localeCompare(right));
+
+      keys.forEach((key) => {
+        const fieldValue = value[key];
+
+        if (fieldValue === undefined || typeof fieldValue === "function" || typeof fieldValue === "symbol") {
+          return;
+        }
+
+        stableObject[key] = toStableSerializable(fieldValue);
+      });
+
+      return stableObject;
+    }
+
+    if (typeof value === "number" && !Number.isFinite(value)) {
+      return null;
+    }
+
+    if (typeof value === "bigint") {
+      return value.toString();
+    }
+
+    return value;
+  }
+
   function catalogSignature(catalog) {
-    return JSON.stringify({
-      company: catalog.company || {},
-      siteBaseUrl: catalog.siteBaseUrl || "",
-      properties: catalog.properties.map((property) => ({
-        id: property.id,
-        name: property.name,
-        sortOrder: Number.isFinite(property.sortOrder) ? property.sortOrder : null,
-        media: Array.isArray(property.media)
-          ? property.media.map((item) => ({
-              type: item.type,
-              src: item.src,
-              duration: item.duration || 0,
-            }))
-          : [],
-      })),
-    });
+    const source = catalog && typeof catalog === "object" ? catalog : null;
+    return JSON.stringify(toStableSerializable(source));
   }
 
   function resolveInitialPropertyIndex(catalog) {

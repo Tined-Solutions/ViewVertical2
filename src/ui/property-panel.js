@@ -949,7 +949,7 @@ export function PropertyPanel({ property, siteBaseUrl, qrUrl, utils, reduceMotio
             motion.div,
             {
               className:
-                "tv-qr-slot absolute right-[clamp(0.52rem,0.86vw,1.06rem)] bottom-[clamp(0.08rem,0.2vw,0.26rem)] z-[5] grid w-fit justify-items-end gap-1 text-right transform-gpu will-change-[transform,opacity]",
+                "tv-qr-slot absolute right-[clamp(0.52rem,0.86vw,1.06rem)] bottom-[clamp(0.08rem,0.2vw,0.26rem)] z-[5] grid w-fit justify-items-center gap-[0.28rem] text-center transform-gpu will-change-[transform,opacity]",
               variants: sectionVariants,
               layout: "position",
               layoutId: "panel-qr-slot",
@@ -964,8 +964,8 @@ export function PropertyPanel({ property, siteBaseUrl, qrUrl, utils, reduceMotio
             }),
             create(
               "p",
-              { className: "tv-qr-caption text-[clamp(0.5rem,0.75vw,0.72rem)] uppercase tracking-[0.22em] text-cyan-100/75" },
-              property.publishedUrl ? "Publicación" : "Inmueble"
+              { className: "tv-qr-caption w-full text-center text-[clamp(0.5rem,0.75vw,0.72rem)] uppercase tracking-[0.22em] text-cyan-100/75" },
+              "Publicación"
             )
           )
         )

@@ -73,7 +73,10 @@
                   <p class="property-panel__price" data-property-price></p>
                   <p class="property-panel__price-label">U$S</p>
                 </div>
-                <div class="property-panel__qr" data-property-qr role="img" aria-label="Codigo QR del inmueble"></div>
+                <div class="property-panel__qr-stack">
+                  <div class="property-panel__qr" data-property-qr role="img" aria-label="Codigo QR del inmueble"></div>
+                  <p class="property-panel__qr-caption">Publicación</p>
+                </div>
               </div>
             </div>
 

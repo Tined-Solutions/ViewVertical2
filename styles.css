@@ -905,6 +905,8 @@ body {
 
 .tv-qr-caption {
   color: rgba(var(--accent-2-rgb), 0.76);
+  width: 100%;
+  text-align: center;
 }
 
 .tv-service-icon svg {
@@ -1028,6 +1030,14 @@ body {
   isolation: isolate;
 }
 
+.property-panel__qr-stack {
+  display: grid;
+  justify-items: center;
+  gap: 0.38rem;
+  flex: none;
+  min-width: 0;
+}
+
 .property-panel__qr img,
 .property-panel__qr canvas,
 .property-panel__qr svg,
@@ -1098,7 +1108,7 @@ body {
   grid-area: qr;
   display: grid;
   gap: 0.42rem;
-  justify-items: start;
+  justify-items: center;
   align-content: start;
   min-width: 0;
 }
@@ -1108,6 +1118,8 @@ body {
   letter-spacing: 0.28em;
   text-transform: uppercase;
   color: rgba(var(--accent-1-rgb), 0.72);
+  width: 100%;
+  text-align: center;
 }
 
 .property-panel__content {
@@ -1272,7 +1284,11 @@ body {
   }
 
   .property-panel__qr-column {
-    justify-items: start;
+    justify-items: center;
+  }
+
+  .property-panel__qr-stack {
+    justify-items: center;
   }
 
   .property-panel__price-wrap {
@@ -1696,7 +1712,8 @@ html.tv-performance-mode .media-stage__overlay {
     width: fit-content !important;
     align-self: start !important;
     justify-self: end !important;
-    text-align: right !important;
+    justify-items: center !important;
+    text-align: center !important;
   }
 
   .tv-qr {
@@ -1710,6 +1727,8 @@ html.tv-performance-mode .media-stage__overlay {
   .tv-qr-caption {
     font-size: clamp(0.66rem, 0.68vmin, 0.94rem) !important;
     letter-spacing: 0.18em !important;
+    width: 100%;
+    text-align: center;
   }
 
   .tv-panel .metric {

@@ -135,9 +135,9 @@ function MetricTile({ metric, index, reduceMotion }) {
   if (reduceMotion) {
     return create(
       "div",
-      { className: "tv-metric inline-flex w-auto max-w-full shrink-0 flex-col items-start self-start rounded-xl bg-white/[0.06] px-2.5 py-2 text-white/90" },
-      create("div", { className: "text-[0.95rem] font-semibold leading-tight text-white sm:text-base" }, metric.value || ""),
-      create("div", { className: "mt-1 text-[0.56rem] uppercase tracking-[0.18em] text-cyan-200/80" }, metric.label || "")
+      { className: "tv-metric inline-flex w-auto max-w-full shrink-0 flex-col items-start self-start rounded-lg bg-white/[0.06] px-2 py-1.5 text-white/90" },
+      create("div", { className: "text-[0.9rem] font-semibold leading-tight text-white sm:text-[0.96rem]" }, metric.value || ""),
+      create("div", { className: "mt-1 text-[0.52rem] uppercase tracking-[0.18em] text-cyan-200/80" }, metric.label || "")
     );
   }
 
@@ -148,7 +148,7 @@ function MetricTile({ metric, index, reduceMotion }) {
   return create(
     motion.div,
     {
-      className: "tv-metric transform-gpu will-change-[transform,opacity] inline-flex w-auto max-w-full shrink-0 flex-col items-start self-start rounded-xl bg-white/[0.06] px-2.5 py-2 text-white/90",
+      className: "tv-metric transform-gpu will-change-[transform,opacity] inline-flex w-auto max-w-full shrink-0 flex-col items-start self-start rounded-lg bg-white/[0.06] px-2 py-1.5 text-white/90",
       layout: "position",
       transition: { layout: { type: "spring", stiffness: 220, damping: 30, mass: 0.78 } },
       initial: reduceMotion ? { opacity: 0 } : { opacity: 0, y: startY, x: startX, scale: 0.985 },
@@ -162,8 +162,8 @@ function MetricTile({ metric, index, reduceMotion }) {
             transition: { duration: 0.2, ease: "easeOut", delay: appearDelay },
           },
     },
-    create("div", { className: "text-[0.95rem] font-semibold leading-tight text-white sm:text-base" }, metric.value || ""),
-    create("div", { className: "mt-1 text-[0.56rem] uppercase tracking-[0.18em] text-cyan-200/80" }, metric.label || "")
+    create("div", { className: "text-[0.9rem] font-semibold leading-tight text-white sm:text-[0.96rem]" }, metric.value || ""),
+    create("div", { className: "mt-1 text-[0.52rem] uppercase tracking-[0.18em] text-cyan-200/80" }, metric.label || "")
   );
 }
 
@@ -336,9 +336,9 @@ function DetailCard({ detail, index, reduceMotion }) {
   if (reduceMotion) {
     return create(
       "div",
-      { className: "tv-detail transform-gpu will-change-[transform,opacity] inline-flex w-auto max-w-full shrink-0 flex-col items-start self-start rounded-xl bg-white/[0.05] px-2.5 py-2" },
-      create("div", { className: "text-[0.54rem] uppercase tracking-[0.2em] text-cyan-200/80" }, detail.label || ""),
-      create("div", { className: "mt-1 text-[0.76rem] leading-tight text-white/90" }, detail.value || "")
+      { className: "tv-detail transform-gpu will-change-[transform,opacity] inline-flex w-auto max-w-full shrink-0 flex-col items-start self-start rounded-lg bg-white/[0.05] px-2 py-1.5" },
+      create("div", { className: "text-[0.5rem] uppercase tracking-[0.18em] text-cyan-200/80" }, detail.label || ""),
+      create("div", { className: "mt-0.5 text-[0.72rem] leading-tight text-white/90" }, detail.value || "")
     );
   }
 
@@ -347,7 +347,7 @@ function DetailCard({ detail, index, reduceMotion }) {
   return create(
     motion.div,
     {
-      className: "tv-detail transform-gpu will-change-[transform,opacity] inline-flex w-auto max-w-full shrink-0 flex-col items-start self-start rounded-xl bg-white/[0.05] px-2.5 py-2",
+      className: "tv-detail transform-gpu will-change-[transform,opacity] inline-flex w-auto max-w-full shrink-0 flex-col items-start self-start rounded-lg bg-white/[0.05] px-2 py-1.5",
       layout: "position",
       transition: { layout: { type: "spring", stiffness: 210, damping: 30, mass: 0.82 } },
       initial: reduceMotion ? { opacity: 0 } : { opacity: 0, y: 8, x: index % 2 === 0 ? -2 : 2, scale: 0.99 },
@@ -361,8 +361,8 @@ function DetailCard({ detail, index, reduceMotion }) {
             transition: { duration: 0.17, ease: "easeOut", delay: appearDelay },
           },
     },
-    create("div", { className: "text-[0.54rem] uppercase tracking-[0.2em] text-cyan-200/80" }, detail.label || ""),
-    create("div", { className: "mt-1 text-[0.76rem] leading-tight text-white/90" }, detail.value || "")
+    create("div", { className: "text-[0.5rem] uppercase tracking-[0.18em] text-cyan-200/80" }, detail.label || ""),
+    create("div", { className: "mt-0.5 text-[0.72rem] leading-tight text-white/90" }, detail.value || "")
   );
 }
 
@@ -901,7 +901,7 @@ export function PropertyPanel({ property, siteBaseUrl, qrUrl, utils, reduceMotio
             primaryMetrics.length
               ? create(
                   motion.div,
-                  { className: "tv-metrics-grid transform-gpu will-change-[transform,opacity] grid grid-cols-1 gap-2 sm:grid-cols-2 xl:grid-cols-3", layout: "position" },
+                  { className: "tv-metrics-grid transform-gpu will-change-[transform,opacity] flex flex-wrap items-start gap-1.5", layout: "position" },
                   primaryMetrics.map((metric, index) =>
                     create(MetricTile, {
                       metric,
@@ -915,7 +915,7 @@ export function PropertyPanel({ property, siteBaseUrl, qrUrl, utils, reduceMotio
             secondaryDetails.length
               ? create(
                   motion.div,
-                  { className: "tv-details-grid transform-gpu will-change-[transform,opacity] grid grid-cols-1 gap-2 sm:grid-cols-2 xl:grid-cols-2", layout: "position" },
+                  { className: "tv-details-grid transform-gpu will-change-[transform,opacity] flex flex-wrap items-start gap-1.5", layout: "position" },
                   secondaryDetails.map((detail, index) =>
                     create(DetailCard, {
                       detail,

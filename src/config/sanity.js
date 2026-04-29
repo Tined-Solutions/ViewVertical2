@@ -15,6 +15,12 @@ window.InmoSanityConfig = {
 	imageQuality: 68,
 	imageMaxWidth: 1920,
 	imageMaxHeight: 3200,
+	verticalPublicationTargets: [
+		"vertical-cremolatti",
+		"ambas-verticales",
+		"horizontal-ambas-verticales",
+		"horizontal-vertical-cremolatti",
+	],
 	publicBaseUrl: "",
 	settingsType: "siteSettings",
 	propertyType: "inmueble",

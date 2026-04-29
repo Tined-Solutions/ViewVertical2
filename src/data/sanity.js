@@ -140,24 +140,74 @@
     }
   }
 
-  function isVerticalPublicationTarget(value) {
-    const normalized = normalizeFieldToken(value);
+  const publicationTargetAliases = {
+    horizontal: ["horizontal"],
+    vertical: ["vertical"],
+    verticalcremolatti: ["verticalcremolatti"],
+    ambasverticales: ["ambasverticales", "vertical", "verticalcremolatti"],
+    horizontalambasverticales: ["horizontalambasverticales", "horizontal", "ambasverticales", "vertical", "verticalcremolatti"],
+    ambos: ["ambos", "horizontal", "vertical"],
+    horizontalverticalcremolatti: ["horizontalverticalcremolatti", "horizontal", "verticalcremolatti"],
+  };
+
+  function resolvePublicationTargetTokens(value) {
+    const text = toText(value);
+
+    if (!text) {
+      return [];
+    }
+
+    const normalized = normalizeFieldToken(text);
 
     if (!normalized) {
-      return false;
+      return [];
     }
 
-    if (normalized === "vertical" || normalized === "ambos") {
-      return true;
+    const alias = publicationTargetAliases[normalized];
+
+    if (alias) {
+      return alias;
     }
 
-    const segments = toText(value)
+    const segments = text
       .toLowerCase()
       .split(/[,;/|+&]|\by\b|\band\b/)
       .map((segment) => normalizeFieldToken(segment))
       .filter(Boolean);
 
-    return segments.includes("vertical") || segments.includes("ambos");
+    if (segments.length > 1) {
+      const tokens = [];
+
+      segments.forEach((segment) => {
+        tokens.push(...resolvePublicationTargetTokens(segment));
+      });
+
+      return tokens;
+    }
+
+    if (normalized.includes("vertical") && normalized.includes("cremolatti")) {
+      return ["verticalcremolatti"];
+    }
+
+    if (normalized.includes("ambas") && normalized.includes("vertical")) {
+      return ["ambasverticales", "vertical", "verticalcremolatti"];
+    }
+
+    if (normalized.includes("vertical")) {
+      return ["vertical"];
+    }
+
+    if (normalized.includes("amb") || normalized.includes("both")) {
+      return ["ambos"];
+    }
+
+    return [normalized];
+  }
+
+  function isVerticalPublicationTarget(value) {
+    const tokens = resolvePublicationTargetTokens(value);
+
+    return tokens.some((token) => token.includes("vertical") || token === "ambos");
   }
 
   function isPublishedForVertical(doc) {
@@ -1694,23 +1744,9 @@
       return;
     }
 
-    rawText
-      .split(/[;,|/]+/)
-      .map((entry) => normalizeFieldToken(entry))
-      .filter(Boolean)
-      .forEach((token) => {
-        if (token.includes("vertical")) {
-          targets.push("vertical");
-          return;
-        }
-
-        if (token.includes("amb") || token.includes("both")) {
-          targets.push("ambos");
-          return;
-        }
-
-        targets.push(token);
-      });
+    resolvePublicationTargetTokens(rawText).forEach((token) => {
+      targets.push(token);
+    });
   }
 
   function extractPublicationTargets(doc) {

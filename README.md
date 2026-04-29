@@ -61,3 +61,4 @@ Las propiedades publicadas aparecen en pantalla ordenadas por `sortOrder` y lueg
 - Los textos y campos de demo fueron reemplazados por configuración y carga remota desde Sanity.
 - En pantallas landscape la experiencia rota 90° para verse en vertical; la foto toma más protagonismo y el zócalo de info queda más compacto debajo.
 # ViewVerticalDeymonnaz
+# ViewVertical2
